@@ -2,6 +2,7 @@ package guru.springframework.msscbrewery.web.controller.v2;
 
 import guru.springframework.msscbrewery.services.v2.BeerServiceV2;
 import guru.springframework.msscbrewery.web.model.v2.BeerDtoV2;
+import lombok.extern.java.Log;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.UUID;
  */
 @RequestMapping("/api/v2/beer")
 @RestController
+@Log
 public class BeerControllerV2 {
     private final BeerServiceV2 beerServiceV2;
 
@@ -24,12 +26,15 @@ public class BeerControllerV2 {
 
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId) {
+        log.info("Inside Get");
 
         return new ResponseEntity<>(beerServiceV2.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping // POST - create new beer
     public ResponseEntity handlePost(@Valid @RequestBody BeerDtoV2 beerDto) {
+        log.info("Inside Post");
+
 
         BeerDtoV2 savedDto = beerServiceV2.saveNewBeer(beerDto);
 
@@ -41,7 +46,9 @@ public class BeerControllerV2 {
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, BeerDtoV2 beerDto) {
+    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDtoV2 beerDto) {
+        log.info("Inside Put");
+
 
         beerServiceV2.updateBeer(beerId, beerDto);
 
@@ -51,6 +58,11 @@ public class BeerControllerV2 {
     @DeleteMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("beerId") UUID beerId) {
+        log.info("Inside Delete");
+
+
         beerServiceV2.deleteById(beerId);
     }
+
+
 }
