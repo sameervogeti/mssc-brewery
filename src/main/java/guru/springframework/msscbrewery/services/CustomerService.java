@@ -1,18 +1,18 @@
 package guru.springframework.msscbrewery.services;
 
-
-
-import guru.springframework.msscbrewery.web.model.BeerDTO;
-import guru.springframework.msscbrewery.web.model.CustomerDTO;
+import guru.springframework.msscbrewery.web.model.CustomerDto;
 
 import java.util.UUID;
 
+/**
+ * Created by jt on 2019-04-21.
+ */
 public interface CustomerService {
-    CustomerDTO getCustomerById(UUID customerId);
+    CustomerDto getCustomerById(UUID customerId);
 
-    CustomerDTO saveCustomer(CustomerDTO customerDTO);
+    CustomerDto saveNewCustomer(CustomerDto customerDto);
 
-    void updateCustomerByID(UUID customerId, CustomerDTO customerDTO);
+    void updateCustomer(UUID customerId, CustomerDto customerDto);
 
-    void deleteCustomerbyId(UUID customerId);
+    void deleteById(UUID customerId);
 }

@@ -1,15 +1,18 @@
 package guru.springframework.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.BeerDTO;
+import guru.springframework.msscbrewery.web.model.BeerDto;
 
 import java.util.UUID;
 
+/**
+ * Created by jt on 2019-04-20.
+ */
 public interface BeerService {
-    BeerDTO getBeerById(UUID beerId);
+    BeerDto getBeerById(UUID beerId);
 
-    BeerDTO saveBeer(BeerDTO beerDTO);
+    BeerDto saveNewBeer(BeerDto beerDto);
 
-    void updateBeerByID(UUID beerId, BeerDTO beerDTO);
+    void updateBeer(UUID beerId, BeerDto beerDto);
 
-    void deleteBeerbyId(UUID beerId);
+    void deleteById(UUID beerId);
 }
